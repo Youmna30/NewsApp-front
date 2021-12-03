@@ -1,0 +1,54 @@
+<form #myForm='ngForm' (ngSubmit)='addNews(myForm.value);myForm.reset' class="container">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" 
+      class="form-control"
+       id="title" 
+       ngModel
+       #title='ngModel'
+       name='title'
+       required
+      >
+      <div class="errors d-flex justify-content-center" *ngIf='title.touched && title.invalid'>
+        <div *ngIf='title.errors?.["required"]'>*Title is required*</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input type="text" 
+      class="form-control"
+       id="description" 
+       ngModel
+       #description='ngModel'
+       name='description'
+       required
+      >
+      <div class="errors d-flex justify-content-center" *ngIf='description.touched && description.invalid'>
+        <div *ngIf='description.errors?.["required"]'>*Body is required*</div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]='myForm.invalid'>Submit</button>
+  </form>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let news of newsData'>
+        
+        <td>{{news.title}}</td>
+        <td>{{news.description}}</td>
+       <td>
+         <a routerLink='/news/{{news._id}}'>
+         <button class="btn btn-primary btn-sm">View News</button>
+        </a>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>

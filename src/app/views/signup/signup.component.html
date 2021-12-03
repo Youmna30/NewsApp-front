@@ -1,0 +1,81 @@
+<form #contactForm='ngForm' (ngSubmit)='signUp(contactForm.value)' class="container">
+    <div class="mb-3">
+        <label class="mb-3" for="name">Name</label>
+        <input type="text"
+         class="form-control"
+         id="name" 
+         placeholder="Name" 
+         ngModel
+         #name='ngModel' 
+         name="name"
+         minlength="3">
+    </div>
+    <div class="errors d-flex justify-content-center" *ngIf="name.touched && name.invalid">
+        <div *ngIf="name.errors?.['required']">*name is required*</div>
+    </div>
+    <div class="mb-3">
+        <label class="mb-3" for="email">Email</label>
+        <input type="email" 
+        class="form-control" 
+        id="email"  
+        placeholder="Enter email"
+        required 
+        ngModel 
+        email
+        #email='ngModel' 
+        name="email"
+        (focus)="onChangeEmail()"
+        >
+    </div>
+    <div class="errors d-flex justify-content-center" *ngIf="email.touched && email.invalid">
+        <div *ngIf="email.errors?.['required']">*email is required*</div>
+        <div *ngIf="email.errors?.['email']">*email is invalid*</div>
+    </div>
+    <div class="errors d-flex justify-content-center" *ngIf="invalidCode && !email.errors?.['required']">
+        *email is already in use*
+    </div>
+    <div class="mb-3">
+        <label class="mb-3" for="password">Password</label>
+        <input type="password"
+         class="form-control"
+         id="password" 
+         placeholder="Password" 
+         required 
+         ngModel
+         #password='ngModel' 
+         name="password"
+         minlength="6">
+    </div>
+    <div class="errors d-flex justify-content-center" *ngIf="password.touched && password.invalid">
+        <div *ngIf="password.errors?.['required']">*password is required*</div>
+    </div>
+    <div class="mb-3">
+        <label class="mb-3" for="age">Age</label>
+        <input type="number"
+         class="form-control"
+         id="age" 
+         placeholder="age" 
+         required 
+         ngModel
+         #age='ngModel' 
+         name="age">
+    </div>
+    <div class="errors d-flex justify-content-center" *ngIf="age.touched && age.invalid">
+        <div *ngIf="age.errors?.['required']">*age is required*</div>
+    </div>
+    <div class="mb-3">
+        <label class="mb-3" for="phoneNumber">Phone Number</label>
+        <input type="text"
+         class="form-control"
+         id="phoneNumber" 
+         placeholder="phoneNumber" 
+         ngModel
+         #phoneNumber='ngModel' 
+         name="phoneNumber"
+         minlength="11">
+    </div>
+    <div class="errors d-flex justify-content-center" *ngIf="phoneNumber.touched && phoneNumber.invalid">
+        <div *ngIf="phoneNumber.errors?.['required']">*phone Number is required*</div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]='contactForm.invalid' >Sign Up</button>
+</form>
